@@ -1,0 +1,19 @@
+import re
+import urllib.request
+
+city=input("enter your city: ")
+url="https://www.weather-forecast.com/locations/"+city+"/forecasts/latest"
+data=urllib.request.urlopen(url).read()
+data1=data.decode("utf-8")
+#print(data1)
+m=re.search('span class="latitude"',data1)
+start=m.start()
+end=start+100
+newstring=data1[start:end]
+#print(newstring)
+
+m=re.search("</span>",newstring)
+end=m.start()-13
+final=newstring[0:end]
+print(final)
+
